@@ -12,6 +12,7 @@ function Game() {
     let playerInput, computerPlayer = {number: null, symbol: ''};
 
     //while playing
+    const match = document.getElementById('match');
     //scissors = 0
     const scissors_button = document.getElementById('scissors');
     //rock = 1
@@ -28,7 +29,8 @@ function Game() {
     restart_button.onclick = function(){
         tries = 0;
         setName()
-        countPoints(-pointsTotal);
+        countPoints(-pointsTotal)
+        match.innerHTML = '';
     }
 
     function setName() {
@@ -94,7 +96,7 @@ function Game() {
 
     function output(comparison) {
         const choice = '(' + ((name) ? name : 'Deine Wahl') + ': <b>' + playerInput.symbol + '</b> - Computer: <b>' + computerPlayer.symbol + '</b>)'; 
-        document.getElementById('output').innerHTML = '<p>' + comparison.text + ' ' + choice + '</p>';
+        match.innerHTML = '<p>' + comparison.text + ' ' + choice + '</p>';
         countPoints(comparison.points);
     }
 
