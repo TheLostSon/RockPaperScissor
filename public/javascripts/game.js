@@ -7,7 +7,7 @@ function Game() {
     const restart_button = document.getElementById('restart');
     const name_field = document.getElementById('name');
     const counter = document.getElementById('counter');
-    let name = '', pointsTotal = 0;
+    let name = '', pointsTotal = 0, tries = 0;
     let playerInput, computerPlayer = {number: null, symbol: ''};
 
     //while playing
@@ -25,6 +25,7 @@ function Game() {
     }
 
     restart_button.onclick = function(){
+        tries = 0;
         setName()
         countPoints(-pointsTotal);
     }
@@ -61,7 +62,7 @@ function Game() {
             output(compare())
         }
         paper_button.onclick = function(){
-            playerInput = {number: 1, symbol: 'Papier'}
+            playerInput = {number: 2, symbol: 'Papier'}
             output(compare())
         }
      
@@ -69,6 +70,7 @@ function Game() {
 
     function compare() 
     {
+        tries++;
         computerPlayer = randomSymbol();
         if (playerInput.number === computerPlayer.number){
             return {text: 'Unentschieden.', points: 1};
@@ -90,7 +92,7 @@ function Game() {
     }
 
     function output(comparison) {
-        const choice = '(Deine Wahl: <b>' + playerInput.symbol + '</b> - Computer: <b>' + computerPlayer.symbol + '</b>)'; 
+        const choice = '(' + ((name) ? name : 'Deine Wahl') + ': <b>' + playerInput.symbol + '</b> - Computer: <b>' + computerPlayer.symbol + '</b>)'; 
         document.getElementById('output').innerHTML = '<p>' + comparison.text + ' ' + choice + '</p>';
         countPoints(comparison.points);
     }
@@ -98,6 +100,8 @@ function Game() {
     function countPoints(points)
     {
         pointsTotal += points;
-        counter.innerHTML = 'Ihre Punktzahl: <b>' + pointsTotal + '</b>';
+        counter.innerHTML = 
+        tries ? 'Ihre Punktzahl: <b>' + pointsTotal + '</b> Punkte nach <b>' + tries + '</b> Versuchen'
+        : 'Ihre Punktzahl: <b>' + pointsTotal + '</b> Punkte';
     }
 }
