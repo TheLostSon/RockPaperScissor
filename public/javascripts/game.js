@@ -4,9 +4,11 @@
 function Game() {
     //before starting
     const start_button = document.getElementById('start');
+    const restart_button = document.getElementById('restart');
     const name_field = document.getElementById('name');
     const counter = document.getElementById('counter');
     let name = '', pointsTotal = 0;
+    let playerInput, computerPlayer = {number: null, symbol: ''};
 
     //while playing
     //scissors = 0
@@ -18,14 +20,18 @@ function Game() {
     
 
     start_button.onclick = function(){
+        setName()
+        start()
+    }
+
+    restart_button.onclick = function(){
+        setName()
+        countPoints(-pointsTotal);
+    }
+
+    function setName() {
         name = name_field.value;
-        if(name.length === 0)
-        {
-            alert('Sie müssen einen Namen eingeben, bevor Sie das Spiel starten können.')
-        }
-        else{
-            start();
-        }
+        document.getElementById('display_name').innerText = name;
     }
 
     //todo: implement button to change name
@@ -34,28 +40,36 @@ function Game() {
     function randomSymbol()
     {
         const number = Math.floor(Math.random() * 3);
-        return {number: number, symbol: (number === 0) ? 'Schere' : (number === 1) ? 'Stein' : 'Papier'};
+        return {number: number, 
+            symbol: (number === 0) ? 'Schere' 
+            : (number === 1) ? 'Stein' 
+            : /*(number === 2) ?*/'Papier'};
     }
 
     //starts the game
     function start() {
-        console.log('Game starts');
+        document.getElementById('game').hidden = false;
+        start_button.hidden = true;
+        restart_button.hidden = false;
 
         scissors_button.onclick = function(){
-            output(compare({number: 0, symbol: 'Schere'}))
+            playerInput = {number: 0, symbol: 'Schere'}
+            output(compare())
         }   
         rock_button.onclick = function(){
-            output(compare({number: 1, symbol: 'Stein'}))
+            playerInput = {number: 1, symbol: 'Stein'}
+            output(compare())
         }
         paper_button.onclick = function(){
-            output(compare({number: 1, symbol: 'Papier'}))
+            playerInput = {number: 1, symbol: 'Papier'}
+            output(compare())
         }
      
     }
 
-    function compare(playerInput) 
+    function compare() 
     {
-        const computerPlayer = randomSymbol();
+        computerPlayer = randomSymbol();
         if (playerInput.number === computerPlayer.number){
             return {text: 'Unentschieden.', points: 1};
         };
@@ -75,9 +89,10 @@ function Game() {
         }
     }
 
-    function output(winnerObject) {
-        document.getElementById('output').innerHTML = '<p>' + winnerObject.text + '</p>';
-        countPoints(winnerObject.points);
+    function output(comparison) {
+        const choice = '(Deine Wahl: <b>' + playerInput.symbol + '</b> - Computer: <b>' + computerPlayer.symbol + '</b>)'; 
+        document.getElementById('output').innerHTML = '<p>' + comparison.text + ' ' + choice + '</p>';
+        countPoints(comparison.points);
     }
 
     function countPoints(points)
