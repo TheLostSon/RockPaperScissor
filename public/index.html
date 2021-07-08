@@ -8,12 +8,33 @@
 
 <body>
   <h1>Schere-Stein-Papier</h1>
-  <p>Willkommen zu Schere Stein Papier.</p>
+  <div class="rules">
+    <p>Willkommen zu Schere-Stein-Papier. Einem kleinen Spiel, welches von mir in Javascript programmiert wurde.</p>
+    <p>Die Regeln sind einfach:
+      <br />- <b>Schere</b> gewinnt gegen <b>Papier</b>
+      <br />- <b>Papier</b> gewinnt gegen <b>Stein</b>
+      <br />- <b>Stein</b> gewinnt gegen <b>Schere</b>
+    </p>
+  </div>
+  <div class="nametag">
+    <p>Um das Spiel zu starten, geben Sie bitte Ihren Namen ein.</p>
+    <label id="name_label" target="name">Name </label>
+    <input id="name" />
+  </div>
+  <div class="gamestart">
+    <button id="start">Spiel Starten</button>
+  </div>
   <br />
-  <br />
-  <br />
-  <label target="name">Bitte geben Sie Ihren Namen ein</label>
-  <input id="name"/>
+  <div class="game">
+    <label id='counter'>Ihre Punktzahl: 0</label>
+    <button id="scissors">Schere</button>
+    <button id="paper">Papier</button>
+    <button id="rock">Stein</button>
+    <p id="output"></p>
+  </div>
 </body>
+<script>
+  Game();
+</script>
 
 </html>
