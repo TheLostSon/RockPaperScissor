@@ -15,4 +15,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
+//todo: may add database to save points per player
+
 module.exports = app;

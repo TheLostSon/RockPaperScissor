@@ -5,6 +5,7 @@ function Game() {
     //before starting
     const start_button = document.getElementById('start');
     const restart_button = document.getElementById('restart');
+    //todo: may add onchange event for instantly displaying the name
     const name_field = document.getElementById('name');
     const counter = document.getElementById('counter');
     let name = '', pointsTotal = 0, tries = 0;
