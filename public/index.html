@@ -6,6 +6,8 @@
   <link rel="shortcut icon" href="/images/favicon_64.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon_192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_128.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/javascripts/game.js"> </script>
@@ -17,7 +19,7 @@
   </nav>
   <div class="background">
     <!-- WELCOME -->
-    <div class="col-9 padded">
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 padded">
       <div id="rules">
         <h2>Willkommen zu Schere-Stein-Papier.</h2>
         <p>Hier können Sie gegen einen Ihren Computer Schere-Stein-Papier spielen.
@@ -38,7 +40,7 @@
     </div>
     <!-- WELCOME END -->
     <!-- RULES -->
-    <div class="col-3 padded">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 padded">
       <ul>
         <li>
           <h3>Regeln</h3>
@@ -80,7 +82,7 @@
     <!-- RULES END -->
     <div class="col-12" style="height: 2rem;"></div>
     <!-- GAME -->
-    <div class="col-9 game" hidden>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 game" hidden>
       <div class="game-content">
         <span class="col-6 left bold overflow" id="display_name"></span>
         <span class="col-6 right bold overflow" style="padding-right: 7px;">Computerspieler</span>
@@ -99,7 +101,7 @@
     </div>
     <!-- GAME END -->
     <!-- SCORE -->
-    <div class="col-3 game padded" hidden>
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 game padded" hidden>
       <ul style="padding-top: 3rem; margin: auto;">
         <table>
           <tr>
@@ -116,6 +118,12 @@
     <!-- SCORE END -->
   </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
   Game();
 </script>
