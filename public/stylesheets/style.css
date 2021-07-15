@@ -25,7 +25,6 @@ body {
 nav {
   background-color: #A0BAAC;
   padding: 7px 16px;
-  margin-bottom: 3px;
 }
 
 h1 {
@@ -79,7 +78,6 @@ ul {
 
 .background {
   padding-left: 13px;
-  padding-top: 3px;
 }
 
 .col-1 {width: 8.33%;}
