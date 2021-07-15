@@ -3,6 +3,10 @@
   src: url("/stylesheets/fonts/Roboto-Regular.ttf");
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   height: auto;
   min-height: 100%;
@@ -67,6 +71,12 @@ button {
   cursor: pointer;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .background {
   padding-left: 13px;
   padding-top: 3px;
@@ -119,12 +129,6 @@ button {
   font-weight: bold;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
 .overflow {
   height: 1.2rem;
   overflow: hidden;
@@ -138,10 +142,6 @@ ul {
 
 .block {
   display: block;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .win {
