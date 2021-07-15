@@ -145,11 +145,15 @@ ul {
 }
 
 .win {
-  background-color: green;
+  background-color: #7AF06C;
 }
 
 .lose {
-  background-color: red;
+  background-color: #F06775;
+}
+
+.draw {
+  background-color: #F0B86F;
 }
 
 .row::after {

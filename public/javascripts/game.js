@@ -16,6 +16,7 @@ function Game() {
         1: {id: 1, type: 'Stein', img: '/images/rock.png'}, 
         2: {id: 2, type: 'Papier', img: '/images/paper.png'}
     };
+    let clickedElement;
 
     //while playing
     const npcImage = document.getElementById('npc_image');
@@ -35,6 +36,7 @@ function Game() {
     restart_button.onclick = function(){
         tries = 0;
         setName()
+        resetColor()
         countPoints(-pointsTotal)
         npcImage.innerHTML = '';
     }
@@ -62,14 +64,20 @@ function Game() {
         restart_button.hidden = false;
 
         scissors_button.onclick = function(){
+            resetColor()
+            clickedElement = scissors_button;
             playerSymbol = {id: 0, type: 'Schere'}
             output(compare())
         }   
         rock_button.onclick = function(){
+            resetColor()
+            clickedElement = rock_button;
             playerSymbol = {id: 1, type: 'Stein'}
             output(compare())
         }
         paper_button.onclick = function(){
+            resetColor()
+            clickedElement = paper_button;
             playerSymbol = {id: 2, type: 'Papier'}
             output(compare())
         }
@@ -79,8 +87,10 @@ function Game() {
     {
         tries++;
         npcSymbol = randomSymbol();
+        resetColor();
         if (playerSymbol.id === npcSymbol.id){
-            return {points: 1, npcSymbol, text: 'Unentschieden.'};
+            clickedElement.classList.add('draw');
+            return {points: 1, npcSymbol, outcome: 'draw'};
         };
         if (
             (playerSymbol.id === 1) && (npcSymbol.id === 0)
@@ -88,16 +98,17 @@ function Game() {
             || (playerSymbol.id === 2) && (npcSymbol.id === 1)
         )
         {
-            return {points: 3, npcSymbol, text: 'Du hast gewonnen.'};
+            clickedElement.classList.add('win');
+            return {points: 3, npcSymbol, outcome: 'lose'};
         }
         else {
-            return {points: 0, npcSymbol, text: 'Der Computer hat gewonnen.'};
+            clickedElement.classList.add('lose');
+            return {points: 0, npcSymbol, outcome: 'win'};
         }
     }
 
-    function output({points, npcSymbol, text}) {
-        // const choice = '(' + ((name) ? name : 'Deine Wahl') + ': <b>' + playerSymbol.type + '</b> - Computer: <b>' + npcSymbol.type + '</b>)'; 
-        npcImage.innerHTML = '<img class="btn_logo" src="' + npcSymbol.img + '" />'
+    function output({points, npcSymbol, outcome}) {
+        npcImage.innerHTML = '<img class="btn_logo ' + outcome + '" src="' + npcSymbol.img + '" />'
         countPoints(points);
     }
 
@@ -106,5 +117,14 @@ function Game() {
         pointsTotal += points;
         outputPoints.innerText= pointsTotal;
         outputTries.innerText = tries;
+    }
+
+    function resetColor() {
+        if(clickedElement) 
+        {
+            clickedElement.classList.remove('win');
+            clickedElement.classList.remove('draw');
+            clickedElement.classList.remove('lose');
+        }
     }
 }
