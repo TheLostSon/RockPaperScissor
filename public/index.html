@@ -2,44 +2,118 @@
 
 <head>
   <title>Schere-Stein-Papier</title>
+
+  <link rel="shortcut icon" href="/images/favicon_64.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon_192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_128.png">
+
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/javascripts/game.js"> </script>
 </head>
 
 <body>
-  <h1>Schere-Stein-Papier</h1>
-  <div id="rules">
-    <h2>Willkommen <b id="display_name"></b> zu Schere-Stein-Papier.</h2>
-    <p>Die Regeln sind einfach:
-      <br /> <b>Schere</b> gewinnt gegen <b>Papier</b>,
-      <br /> <b>Papier</b> gewinnt gegen <b>Stein</b> und
-      <br /> <b>Stein</b> gewinnt gegen <b>Schere</b>.
-    </p>
-    <p>
-      Die Punkte werden wie beim Fußball gezählt:
-      Ein <b>Sieg gibt drei Punkte</b>, ein <b>Unentschieden einen Punkt</b> und eine <b>Niederlage null Punkte</b>.
-    </p>
-  </div>
-  <div id="basics">
-    <span id="nametag">
-      <!-- <p>Bevor Sie das Spiel starten, geben Sie bitte Ihren Namen ein</p> -->
-      <label id="name_label" target="name">Name </label>
-      <input id="name" />
-    </span>
-    <span id="gamestart">
-      <button id="start">Spiel Starten</button>
-      <button id="restart" hidden>Neustarten</button>
-    </span>
-  </div>
-  <br />
-  <div id="game" hidden>
-    <label id='counter'>Ihre Punktzahl: 0 Punkte</label>
-    <p>
-      <button id="scissors">Schere</button>
-      <button id="rock">Stein</button>
-      <button id="paper">Papier</button>
-    </p>
-    <p id="match"></p>
+  <nav>
+    <h1>Schere-Stein-Papier</h1>
+  </nav>
+  <div class="background">
+    <!-- WELCOME -->
+    <div class="col-9 padded">
+      <div id="rules">
+        <h2>Willkommen zu Schere-Stein-Papier.</h2>
+        <p>Hier können Sie gegen einen Ihren Computer Schere-Stein-Papier spielen.
+          <br />Der Computer wählt dabei zufällig ein Symbol aus.
+          <br />Für jeden Sieg gibt es Punkte. Drücken Sie auf "Spiel Starten", um ein neues Spiel zu beginnen.
+        </p>
+      </div>
+      <div id="basics">
+        <span id="nametag">
+          <label id="name_label" target="name">Name </label>
+          <input id="name" />
+        </span>
+        <span id="gamestart">
+          <button id="start">Spiel Starten</button>
+          <button id="restart" hidden>Neustarten</button>
+        </span>
+      </div>
+    </div>
+    <!-- WELCOME END -->
+    <!-- RULES -->
+    <div class="col-3 padded">
+      <ul>
+        <li>
+          <h3>Regeln</h3>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td><b>Schere</b> gewinnt gegen <b>Papier</b></td>
+            </tr>
+            <tr>
+              <td><b>Papier</b> gewinnt gegen <b>Stein</b></td>
+            </tr>
+            <tr>
+              <td><b>Stein</b> gewinnt gegen <b>Schere</b></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <h3 style="padding-top: 1rem">Punkte</h3>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td>Sieg</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Niederlage</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Unentschieden</td>
+              <td>1</td>
+            </tr>
+          </table>
+        </li>
+      </ul>
+    </div>
+    <!-- RULES END -->
+    <div class="col-12" style="height: 2rem;"></div>
+    <!-- GAME -->
+    <div class="col-9 game" hidden>
+      <div class="game-content">
+        <span class="col-6 left bold overflow" id="display_name"></span>
+        <span class="col-6 right bold overflow" style="padding-right: 7px;">Computerspieler</span>
+
+        <span class="col-2 centered">
+          <img id="scissors" class="btn_logo" src="/images/scissors.png" alt="Schere" /></span>
+        <span class="col-2 centered">
+          <img id="rock" class="btn_logo" src="/images/rock.png" alt="Stein" /></span>
+        <span class="col-2 centered">
+          <img id="paper" class="btn_logo" src="/images/paper.png" alt="Papier" /></span>
+
+        <span class="col-4 centered">
+          <img class="btn_logo" src="/images/versus.png" /></span>
+        <span class="col-2 centered" id="npc_image"></span>
+      </div>
+    </div>
+    <!-- GAME END -->
+    <!-- SCORE -->
+    <div class="col-3 game padded" hidden>
+      <ul style="padding-top: 3rem; margin: auto;">
+        <table>
+          <tr>
+            <td>Ihre Punktzahl</td>
+            <td class="bold"><span id='points'>0</span></td>
+          </tr>
+          <tr>
+            <td>Ihre Versuche</td>
+            <td class="bold"><span id='tries'>0</span></td>
+          </tr>
+        </table>
+      </ul>
+    </div>
+    <!-- SCORE END -->
   </div>
 </body>
 <script>

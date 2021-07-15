@@ -7,12 +7,18 @@ function Game() {
     const restart_button = document.getElementById('restart');
     //todo: may add onchange event for instantly displaying the name
     const name_field = document.getElementById('name');
-    const counter = document.getElementById('counter');
+    const outputPoints = document.getElementById('points');
+    const outputTries = document.getElementById('tries');
     let name = '', pointsTotal = 0, tries = 0;
-    let playerInput, computerPlayer = {number: null, symbol: ''};
+    let playerSymbol, npcSymbol;
+    const computerPlayer = {
+        0: {id: 0, type: 'Schere', img: '/images/scissors.png'}, 
+        1: {id: 1, type: 'Stein', img: '/images/rock.png'}, 
+        2: {id: 2, type: 'Papier', img: '/images/paper.png'}
+    };
 
     //while playing
-    const match = document.getElementById('match');
+    const npcImage = document.getElementById('npc_image');
     //scissors = 0
     const scissors_button = document.getElementById('scissors');
     //rock = 1
@@ -30,12 +36,12 @@ function Game() {
         tries = 0;
         setName()
         countPoints(-pointsTotal)
-        match.innerHTML = '';
+        npcImage.innerHTML = '';
     }
 
     function setName() {
         name = name_field.value;
-        document.getElementById('display_name').innerText = name;
+        document.getElementById('display_name').innerText = name ? name : 'Deine Auswahl';
     }
 
     //todo: implement button to change name
@@ -44,67 +50,61 @@ function Game() {
     function randomSymbol()
     {
         const number = Math.floor(Math.random() * 3);
-        return {number: number, 
-            symbol: (number === 0) ? 'Schere' 
-            : (number === 1) ? 'Stein' 
-            : /*(number === 2) ?*/'Papier'};
+        return computerPlayer[number];
     }
 
     //starts the game
     function start() {
-        document.getElementById('game').hidden = false;
+        //todo: with more elements change to 
+        document.getElementsByClassName('game')[0].hidden = false;
+        document.getElementsByClassName('game')[1].hidden = false;
         start_button.hidden = true;
         restart_button.hidden = false;
 
         scissors_button.onclick = function(){
-            playerInput = {number: 0, symbol: 'Schere'}
+            playerSymbol = {id: 0, type: 'Schere'}
             output(compare())
         }   
         rock_button.onclick = function(){
-            playerInput = {number: 1, symbol: 'Stein'}
+            playerSymbol = {id: 1, type: 'Stein'}
             output(compare())
         }
         paper_button.onclick = function(){
-            playerInput = {number: 2, symbol: 'Papier'}
+            playerSymbol = {id: 2, type: 'Papier'}
             output(compare())
         }
-     
     }
 
     function compare() 
     {
         tries++;
-        computerPlayer = randomSymbol();
-        if (playerInput.number === computerPlayer.number){
-            return {text: 'Unentschieden.', points: 1};
+        npcSymbol = randomSymbol();
+        if (playerSymbol.id === npcSymbol.id){
+            return {points: 1, npcSymbol, text: 'Unentschieden.'};
         };
         if (
-            (playerInput.symbol === 'Stein') 
-            && (computerPlayer.symbol === 'Schere')
-            || (playerInput.symbol === 'Schere') 
-            && (computerPlayer.symbol === 'Papier')
-            || (playerInput.symbol === 'Papier') 
-            && (computerPlayer.symbol === 'Stein')
+            (playerSymbol.id === 1) && (npcSymbol.id === 0)
+            || (playerSymbol.id === 0) && (npcSymbol.id === 2)
+            || (playerSymbol.id === 2) && (npcSymbol.id === 1)
         )
         {
-            return {text: 'Du hast gewonnen.', points: 3};
+            return {points: 3, npcSymbol, text: 'Du hast gewonnen.'};
         }
         else {
-            return {text: 'Der Computer hat gewonnen.', points: 0};
+            return {points: 0, npcSymbol, text: 'Der Computer hat gewonnen.'};
         }
     }
 
-    function output(comparison) {
-        const choice = '(' + ((name) ? name : 'Deine Wahl') + ': <b>' + playerInput.symbol + '</b> - Computer: <b>' + computerPlayer.symbol + '</b>)'; 
-        match.innerHTML = '<p>' + comparison.text + ' ' + choice + '</p>';
-        countPoints(comparison.points);
+    function output({points, npcSymbol, text}) {
+        // const choice = '(' + ((name) ? name : 'Deine Wahl') + ': <b>' + playerSymbol.type + '</b> - Computer: <b>' + npcSymbol.type + '</b>)'; 
+        npcImage.innerHTML = '<img class="btn_logo" src="' + npcSymbol.img + '" />'
+        countPoints(points);
     }
 
     function countPoints(points)
     {
         pointsTotal += points;
-        counter.innerHTML = 
-        tries ? 'Ihre Punktzahl: <b>' + pointsTotal + '</b> Punkte nach <b>' + tries + '</b> Versuchen'
-        : 'Ihre Punktzahl: <b>' + pointsTotal + '</b> Punkte';
+        outputPoints.innerText= pointsTotal;
+        outputTries.innerText = tries;
     }
 }

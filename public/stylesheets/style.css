@@ -1,10 +1,159 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #333;
+@font-face {
+  font-family: "Roboto";
+  src: url("/stylesheets/fonts/Roboto-Regular.ttf");
 }
 
-a {
+html {
+  height: auto;
+  min-height: 100%;
+  background-color: #CDEEDC;
+}
+
+body {
+  font: 1rem "Roboto", Helvetica, Arial, sans-serif;
   color: #333;
-  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100%;
+}
+
+nav {
+  background-color: #A0BAAC;
+  padding: 7px 16px;
+  margin-bottom: 3px;
+}
+
+h1 {
+  margin: 0;
+  color: #000;
+  width: 100%;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  height: 1.5rem;
+  width: 12rem;
+  color: #333;
+  background-color: #CDEEDC;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-color: #2F5440;
+  border-radius: 0;
+  border-width: 1px;
+}
+
+label {
+  height: 1.5rem;
+  width: auto;
+}
+
+button {
+  height: 1.5rem;
+  width: 12rem;
+  color: #333;
+  background-color: #B6D4C3;
+  border: 1px solid #2F5440;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.background {
+  padding-left: 13px;
+  padding-top: 3px;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+[class*="col-"] {
+  float: left;
+  /* border: 1px solid red; */
+}
+
+.btn_logo {
+  width: 7rem;
+  height: 7rem;
+  /* padding: 0; */
+  /* background: rgb(146, 231, 90); */
+  border-radius: 7rem;
+}
+
+.centered {
+  text-align: center;
+}
+
+.padded {
+  padding: 0 3px 7px 3px;
+}
+
+.left{
+  text-align: left;
+}
+
+.right{
+  text-align: right;
+}
+
+.bold {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.overflow {
+  height: 1.2rem;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.game-content {
+  max-height: 5rem;
+  margin: auto;
+}
+
+.block {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.win {
+  background-color: green;
+}
+
+.lose {
+  background-color: red;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
 }
