@@ -108,7 +108,7 @@ function Game() {
     }
 
     function output({points, npcSymbol, outcome}) {
-        npcImage.innerHTML = '<img class="btn_logo ' + outcome + '" src="' + npcSymbol.img + '" />'
+        npcImage.innerHTML = '<img class="btn_logo no_cursor ' + outcome + '" src="' + npcSymbol.img + '" />'
         countPoints(points);
     }
 
