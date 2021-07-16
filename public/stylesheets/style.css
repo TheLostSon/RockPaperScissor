@@ -106,6 +106,10 @@ td {
   float: left;
 }
 
+.game_status{
+  padding-left: 3rem;
+}
+
 .rules {
   border: 1px solid #796020;
   border-radius: 10px;
@@ -150,6 +154,7 @@ td {
 
 .right{
   text-align: right;
+  padding-right: 7px;
 }
 
 .bold {

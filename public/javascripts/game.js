@@ -10,7 +10,12 @@ function Game() {
     }
 //VARIABLES AND CONSTANTS    
     const name_field = document.getElementById('name');
+    //game status
     const game_status = document.getElementById('game_status');
+    const game_status_win = document.getElementById('game_status_win');
+    const game_status_lose = document.getElementById('game_status_lose');
+    const game_status_draw = document.getElementById('game_status_draw');
+    let gameStatus = game_status;
     //init button to reset game
     const restart_button = document.getElementById('restart');
     //init button to show previous match
@@ -71,26 +76,23 @@ function Game() {
     async function output(comSymbol) {
         removeClickEvents();
         await loading()
-        // comImage.style.transition = 'transform 0.5s ease-in-out'
-        comLoading.hidden = true;
         comImage.classList.add(outcome.com)
         computerElement.hidden = false;
-        // comImage.style.transform = 'scale(1)'
         tries++;
         countPoints(points.player, points.com);
-        animate();
+        await animate();
     }
 
     //loading animation for better gameplay
     function loading() {
         return new Promise((resolve => {
             comLoading.hidden = false;
-            // comImage.style.transform = 'scale(1)'
-            comLoading.style.transition = 'transform 2s'
-            comLoading.style.transform = 'rotate(720deg)'
+            comImage.style.transition = 'transform 2575ms'
+            comImage.style.transform = 'rotate(1080deg)'
             setTimeout(function() {
-                resolve('resolved');
-            }, 2000)
+                comLoading.hidden = true;
+                resolve();
+            }, 2500)
         }))
     }
 
@@ -100,11 +102,11 @@ function Game() {
     {
         comSymbol = randomSymbol();
         computerElement = document.getElementById(comSymbol.img);
-        console.log(computerElement);
         resetStyle();
         if (playerSymbol.id === comSymbol.id){
             points = {player: 1, com: 1}
             outcome = {player: 'draw', com: 'draw'}
+            gameStatus = game_status_draw;
             return comSymbol;
         };
         if (
@@ -115,11 +117,13 @@ function Game() {
         {
             points = {player: 3, com: 0}
             outcome = {player: 'win', com: 'lose'}
+            gameStatus = game_status_win;
             return comSymbol;
         }
         else {
             points = {player: 0, com: 3}
             outcome = {player: 'lose', com: 'win'}
+            gameStatus = game_status_lose;
             return comSymbol;
         }
     }
@@ -147,6 +151,8 @@ function Game() {
     function resetStyle() {
         if(clickedElement) 
         {
+            comImage.style.transition = 'transform 0ms'
+            comImage.style.transform = 'none'
             clickedElement.classList.remove('win');
             clickedElement.classList.remove('draw');
             clickedElement.classList.remove('lose');
@@ -159,14 +165,13 @@ function Game() {
     //animates the recent round of the game
     function animate() {
         clickedElement.classList.add(outcome.player);
-        const resetCount = tries;
+        game_status.hidden = true;
+        gameStatus.hidden = false;
         setTimeout(function() {
-            if(tries === resetCount) {
                 resetStyle()
                 setClickEvents()
                 lastMatch_button.hidden = false;
-            }
-        }, 3000)
+        }, 2500)
     }
 
     //displays results of the last played round 
@@ -180,7 +185,7 @@ function Game() {
     function setClickEvents(){
         restart_button.addEventListener('click', restartButton) 
         restart_button.hidden = false;
-        game_status.hidden = true;
+        gameStatus.hidden = true;
 
         scissors_button.addEventListener('click', scissorButton) 
         scissors_button.style.cursor = 'pointer';

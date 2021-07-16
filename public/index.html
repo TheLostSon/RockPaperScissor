@@ -22,14 +22,15 @@
     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 padded">
       <div id="rules">
         <h2>Willkommen zu Schere-Stein-Papier.</h2>
-        <p>Hier können Sie gegen Ihren Computer Schere-Stein-Papier spielen.</p>
-        <p>Vor dem Spiel können Sie einen Namen wählen, der als Ihr Spielername angezeigt werden soll.
-          <br />Drücken Sie auf <b><i>"Spiel Starten"</i></b>, um ein neues Spiel zu beginnen.
-          <br />Dann haben Sie die Möglichkeit auf eines der Symbole (<b><i>Schere, Stein, Papier</i></b>) zu drücken.
+        <p>Hier kannst du gegen deinen Computer Schere-Stein-Papier spielen.</p>
+        <p>Vor dem Spiel kannst du einen Namen wählen, der als dein Spielername angezeigt werden soll.
+          <br />Drück auf <b><i>"Spiel Starten"</i></b>, um ein neues Spiel zu beginnen.
+          <br />Dann hast du die Möglichkeit auf eines der Symbole (<b><i>Schere, Stein, Papier</i></b>) zu drücken.
           <br />Der Computer wählt zufällig ein Symbol aus und der Sieger wird ermittelt.
-          <br />Für jeden Sieg gibt es drei Punkte. Bei einem Unentschieden gibt es einen Punkt für beide Spieler. 
+          <br />Für jeden Sieg gibt es drei Punkte. Bei einem Unentschieden gibt es einen Punkt für beide Spieler.
         </p>
-        <p class="game" hidden>Um die Punkte zurückzusetzen, klicken Sie auf <b><i>"Neustarten"</i></b>. Falls gewünscht können Sie dabei auch Ihren Spielernamen ändern.</p>
+        <p class="game" hidden>Um die Punkte zurückzusetzen, klicke auf <b><i>"Neustarten"</i></b>. Falls gewünscht
+          kannst du dabei auch deinen Spielernamen ändern.</p>
       </div>
       <div id="basics">
         <span id="nametag">
@@ -39,7 +40,10 @@
         <span id="gamestart">
           <button id="start">Spiel Starten</button>
           <button id="restart" hidden>Neustarten</button>
-          <text id="game_status" style="padding-left: 3rem;" hidden>Spiel läuft gerade...</text>
+          <text id="game_status" class="game_status" hidden>Spiel läuft gerade...</text>
+          <text id="game_status_win" class="game_status bold" hidden>Juhuu! Gewonnen!</text>
+          <text id="game_status_lose" class="game_status bold" hidden>Schade. Leider verloren.</text>
+          <text id="game_status_draw" class="game_status bold" hidden>Unentschieden. Versuch's nochmal!</text>
           <button id="last_match" hidden>Zeige letztes Ergebnis</button>
         </span>
       </div>
@@ -93,7 +97,7 @@
     <!-- GAME -->
     <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 col-xs-12 game row" hidden>
       <div class="col-6 left bold overflow" id="display_name_game"></div>
-      <div class="col-6 right bold overflow" style="padding-right: 7px;">Computerspieler</div>
+      <div class="col-6 right bold overflow">Computerspieler</div>
 
       <div class="col-2 centered">
         <div class="centered background">
@@ -151,7 +155,7 @@
     <div class="col-xl-1 col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
   </main>
   <footer>
-    <!-- todo: add "Impressum" + "Datenschutzerklärung" -->
+    <!-- todo: add "Impressum" + "Datenschutzerklärung" with information about external scripts -->
   </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
