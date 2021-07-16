@@ -119,7 +119,7 @@ td {
   margin: auto;
 }
 
-.btn_logo:active {
+.clickable:active {
   transform: scale(0.95);
 }
 

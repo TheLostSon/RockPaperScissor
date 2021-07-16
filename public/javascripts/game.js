@@ -3,27 +3,34 @@
 //Pseudo-Class Game | called in index.html
 function Game() {
     //before starting
-    const start_button = document.getElementById('start');
-    const restart_button = document.getElementById('restart');
-    const lastMatch_button = document.getElementById('last_match');
+    document.getElementById('start').onclick = function(){
+        setName()
+        start()
+        this.hidden = true;
+    }
+//VARIABLES AND CONSTANTS    
     const name_field = document.getElementById('name');
-    //while playing
-    const outputPlayerPoints = document.getElementById('points_player');
-    const outputComPoints = document.getElementById('points_com');
-    const outputTries = document.getElementById('tries');
-    let name = '', playerSymbol = {id: 0, type: ''}, npcSymbol = {id: 0, type: ''};
+    const game_status = document.getElementById('game_status');
+    //init button to reset game
+    const restart_button = document.getElementById('restart');
+    //init button to show previous match
+    const lastMatch_button = document.getElementById('last_match');
+
+    //variables and constants while playing
+    let name = '', playerSymbol = {id: 0, type: ''}, comSymbol = {id: 0, type: ''};
     const computerPlayer = {
-        0: {id: 1, type: 'Schere', img: '/images/scissors.png'}, 
-        1: {id: 2, type: 'Stein', img: '/images/rock.png'}, 
-        2: {id: 3, type: 'Papier', img: '/images/paper.png'}
+        0: {id: 1, type: 'Schere', img: 'com_scissors'}, 
+        1: {id: 2, type: 'Stein', img: 'com_rock'}, 
+        2: {id: 3, type: 'Papier', img: 'com_paper'}
     };
-    let clickedElement;
+    let clickedElement, computerElement;
     let outcome = {player: '', com: ''};
     let points = {player: 0, com: 0};
     let pointsTotalPlayer = 0, pointsTotalCom = 0, tries = 0;
 
-    //npc
-    const npcImage = document.getElementById('npc_image');
+    //computer 
+    const comImage = document.getElementById('com_image');
+    const comLoading = document.getElementById('com_loading');
     //playerchoice: scissors
     const scissors_button = document.getElementById('scissors');
     //playerchoice: rock
@@ -31,12 +38,12 @@ function Game() {
     //playerchoice: paper
     const paper_button = document.getElementById('paper');
     
+    //elements to output score
+    const outputPlayerPoints = document.getElementById('points_player');
+    const outputComPoints = document.getElementById('points_com');
+    const outputTries = document.getElementById('tries');
 
-    start_button.onclick = function(){
-        setName()
-        start()
-    }
-
+//FUNCTIONS
     //displays the chosen name
     function setName() {
         name = name_field.value;
@@ -50,35 +57,10 @@ function Game() {
         document.getElementsByClassName('game')[1].hidden = false; //spacer
         document.getElementsByClassName('game')[2].hidden = false; //game
         document.getElementsByClassName('game')[3].hidden = false; //points
-        start_button.hidden = true;
         restart_button.hidden = false;
 
-        scissors_button.onclick = function(){
-            resetStyle()
-            clickedElement = scissors_button.parentElement;
-            playerSymbol = {id: 1, type: 'Schere'}
-            output(compare())
-        }   
-        rock_button.onclick = function(){
-            resetStyle()
-            clickedElement = rock_button.parentElement;
-            playerSymbol = {id: 2, type: 'Stein'}
-            output(compare())
-        }
-        paper_button.onclick = function(){
-            resetStyle()
-            clickedElement = paper_button.parentElement;
-            playerSymbol = {id: 3, type: 'Papier'}
-            output(compare())
-        }
-        restart_button.onclick = function(){
-            tries = 0;
-            setName()
-            resetStyle()
-            countPoints(-pointsTotalPlayer, -pointsTotalCom)
-            npcImage.innerHTML = '';
-            lastMatch_button.hidden = true;
-        }
+        setClickEvents()
+
         lastMatch_button.onclick = function(){
             showLastMatch()
             lastMatch_button.hidden = true;
@@ -86,40 +68,59 @@ function Game() {
     }
 
     //displays outcome of the recent round
-    function output(npcSymbol) {
-        npcImage.style.transition = 'transform 0.5s ease-in-out'
-        npcImage.innerHTML = '<div class="background ' + outcome.com + '"><img class="btn_logo no_cursor" src="' + npcSymbol.img + '" /></div>'
-        npcImage.style.transform = 'scale(1)'
+    async function output(comSymbol) {
+        removeClickEvents();
+        await loading()
+        // comImage.style.transition = 'transform 0.5s ease-in-out'
+        comLoading.hidden = true;
+        comImage.classList.add(outcome.com)
+        computerElement.hidden = false;
+        // comImage.style.transform = 'scale(1)'
+        tries++;
         countPoints(points.player, points.com);
         animate();
     }
 
+    //loading animation for better gameplay
+    function loading() {
+        return new Promise((resolve => {
+            comLoading.hidden = false;
+            // comImage.style.transform = 'scale(1)'
+            comLoading.style.transition = 'transform 2s'
+            comLoading.style.transform = 'rotate(720deg)'
+            setTimeout(function() {
+                resolve('resolved');
+            }, 2000)
+        }))
+    }
+
     //sets outcome and points based on symbolId comparison (using the rock-paper-scissors-rules)
-    //returns the random npc-player
+    //returns the random com-player
     function compare() 
     {
-        tries++;
-        npcSymbol = randomSymbol();
+        comSymbol = randomSymbol();
+        computerElement = document.getElementById(comSymbol.img);
+        console.log(computerElement);
         resetStyle();
-        if (playerSymbol.id === npcSymbol.id){
+        if (playerSymbol.id === comSymbol.id){
             points = {player: 1, com: 1}
             outcome = {player: 'draw', com: 'draw'}
-            return npcSymbol;
+            return comSymbol;
         };
         if (
-            (playerSymbol.id === 2) && (npcSymbol.id === 1)
-            || (playerSymbol.id === 1) && (npcSymbol.id === 3)
-            || (playerSymbol.id === 3) && (npcSymbol.id === 2)
+            (playerSymbol.id === 2) && (comSymbol.id === 1)
+            || (playerSymbol.id === 1) && (comSymbol.id === 3)
+            || (playerSymbol.id === 3) && (comSymbol.id === 2)
         )
         {
             points = {player: 3, com: 0}
             outcome = {player: 'win', com: 'lose'}
-            return npcSymbol;
+            return comSymbol;
         }
         else {
             points = {player: 0, com: 3}
             outcome = {player: 'lose', com: 'win'}
-            return npcSymbol;
+            return comSymbol;
         }
     }
 
@@ -134,8 +135,10 @@ function Game() {
     function countPoints(pointsP, pointsC)
     {
         pointsTotalPlayer += pointsP;
-        outputPlayerPoints.innerText= pointsTotalPlayer;
         pointsTotalCom += pointsC;
+        
+        //output
+        outputPlayerPoints.innerText= pointsTotalPlayer;
         outputComPoints.innerText= pointsTotalCom;
         outputTries.innerText = tries;
     }
@@ -144,31 +147,109 @@ function Game() {
     function resetStyle() {
         if(clickedElement) 
         {
-            clickedElement.style.transform = 'none'
             clickedElement.classList.remove('win');
             clickedElement.classList.remove('draw');
             clickedElement.classList.remove('lose');
-            npcImage.style.transform = 'scale(0)'
+            if (outcome.com) comImage.classList.remove(outcome.com);
+            computerElement.hidden = true;
         }
         lastMatch_button.hidden = true;
     }
 
     //animates the recent round of the game
     function animate() {
-        clickedElement.style.transform = 'scale(0.777)'
         clickedElement.classList.add(outcome.player);
         const resetCount = tries;
         setTimeout(function() {
             if(tries === resetCount) {
                 resetStyle()
+                setClickEvents()
                 lastMatch_button.hidden = false;
             }
-        }, 2500)
+        }, 3000)
     }
 
     //displays results of the last played round 
     function showLastMatch() {
         clickedElement.classList.add(outcome.player)
-        npcImage.style.transform = 'scale(1)'
+        computerElement.hidden = false;
+        comImage.classList.add(outcome.com)
+    }
+
+    //enable gameplay
+    function setClickEvents(){
+        restart_button.addEventListener('click', restartButton) 
+        restart_button.hidden = false;
+        game_status.hidden = true;
+
+        scissors_button.addEventListener('click', scissorButton) 
+        scissors_button.style.cursor = 'pointer';
+        scissors_button.classList.add('clickable')
+        scissors_button.parentElement.style.transform = 'scale(1)'
+
+        rock_button.addEventListener('click', rockButton) 
+        rock_button.style.cursor = 'pointer';
+        rock_button.classList.add('clickable')
+        rock_button.parentElement.style.transform = 'scale(1)'
+
+        paper_button.addEventListener('click', paperButton) 
+        paper_button.style.cursor = 'pointer';
+        paper_button.classList.add('clickable')
+        paper_button.parentElement.style.transform = 'scale(1)'
+    }
+
+    //disable gameplay
+    function removeClickEvents()
+    {
+        restart_button.removeEventListener('click', restartButton)
+        restart_button.hidden = true;
+        game_status.hidden = false;
+
+        scissors_button.removeEventListener('click', scissorButton);
+        scissors_button.style.cursor = 'default';
+        scissors_button.classList.remove('clickable')
+        scissors_button.parentElement.style.transform = 'scale(0.777)'
+
+        rock_button.removeEventListener('click', rockButton);
+        rock_button.style.cursor = 'default';
+        rock_button.classList.remove('clickable')
+        rock_button.parentElement.style.transform = 'scale(0.777)'
+
+        paper_button.removeEventListener('click', paperButton);
+        paper_button.style.cursor = 'default';
+        paper_button.classList.remove('clickable')
+        paper_button.parentElement.style.transform = 'scale(0.777)'
+    }
+
+    //click function for scissors
+    function scissorButton(){
+        resetStyle()
+        clickedElement = scissors_button.parentElement;
+        playerSymbol = {id: 1, type: 'Schere'}
+        output(compare())
+    }  
+
+    //click function for rock
+    function rockButton(){
+        resetStyle()
+        clickedElement = rock_button.parentElement;
+        playerSymbol = {id: 2, type: 'Stein'}
+        output(compare())
+    }
+
+    //click function for paper
+    function paperButton(){
+        resetStyle()
+        clickedElement = paper_button.parentElement;
+        playerSymbol = {id: 3, type: 'Papier'}
+        output(compare())
+    }
+
+    function restartButton(){
+        tries = 0;
+        setName()
+        resetStyle()
+        countPoints(-pointsTotalPlayer, -pointsTotalCom)
+        lastMatch_button.hidden = true;
     }
 }

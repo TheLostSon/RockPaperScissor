@@ -39,6 +39,7 @@
         <span id="gamestart">
           <button id="start">Spiel Starten</button>
           <button id="restart" hidden>Neustarten</button>
+          <text id="game_status" style="padding-left: 3rem;" hidden>Spiel läuft gerade...</text>
           <button id="last_match" hidden>Zeige letztes Ergebnis</button>
         </span>
       </div>
@@ -96,24 +97,31 @@
 
       <div class="col-2 centered">
         <div class="centered background">
-          <img id="scissors" class="btn_logo" src="/images/scissors.png" alt="Schere" />
+          <img id="scissors" class="btn_logo clickable" src="/images/scissors.png" alt="Schere" />
         </div>
       </div>
       <div class="col-2 centered">
         <div class="centered background">
-          <img id="rock" class="btn_logo" src="/images/rock.png" alt="Stein" />
+          <img id="rock" class="btn_logo clickable" src="/images/rock.png" alt="Stein" />
         </div>
       </div>
       <div class="col-2 centered">
         <div class="centered background">
-          <img id="paper" class="btn_logo" src="/images/paper.png" alt="Papier" />
+          <img id="paper" class="btn_logo clickable" src="/images/paper.png" alt="Papier" />
         </div>
       </div>
 
       <div class="col-4 centered">
         <img class="btn_logo no_cursor" src="/images/versus.png" />
       </div>
-      <div class="col-2 centered" id="npc_image"></div>
+      <div class="col-2 centered">
+        <div id="com_image" class="background">
+          <img id="com_loading" class="btn_logo no_cursor" src="/images/loading.png" hidden />
+          <img id="com_scissors" class="btn_logo no_cursor" src="/images/scissors.png" hidden />
+          <img id="com_rock" class="btn_logo no_cursor" src="/images/rock.png" hidden />
+          <img id="com_paper" class="btn_logo no_cursor" src="/images/paper.png" hidden />
+        </div>
+      </div>
     </div>
     <!-- GAME END -->
     <!-- SCORE -->
