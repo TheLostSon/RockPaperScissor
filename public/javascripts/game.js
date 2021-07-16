@@ -46,9 +46,10 @@ function Game() {
 
     //starts the game, initiates buttons
     function start() {
-        document.getElementsByClassName('game')[0].hidden = false;
-        document.getElementsByClassName('game')[1].hidden = false;
-        document.getElementsByClassName('game')[2].hidden = false;
+        document.getElementsByClassName('game')[0].hidden = false; //restart-text 
+        document.getElementsByClassName('game')[1].hidden = false; //spacer
+        document.getElementsByClassName('game')[2].hidden = false; //game
+        document.getElementsByClassName('game')[3].hidden = false; //points
         start_button.hidden = true;
         restart_button.hidden = false;
 
@@ -80,11 +81,13 @@ function Game() {
         }
         lastMatch_button.onclick = function(){
             showLastMatch()
+            lastMatch_button.hidden = true;
         }
     }
 
     //displays outcome of the recent round
     function output(npcSymbol) {
+        npcImage.style.transition = 'transform 0.5s ease-in-out'
         npcImage.innerHTML = '<div class="background ' + outcome.com + '"><img class="btn_logo no_cursor" src="' + npcSymbol.img + '" /></div>'
         npcImage.style.transform = 'scale(1)'
         countPoints(points.player, points.com);
