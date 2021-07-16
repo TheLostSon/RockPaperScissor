@@ -10,20 +10,20 @@
 html {
   height: auto;
   min-height: 100%;
-  background-color: #FCFAF2;
+  background-color: #FAECC9;
 }
 
 body {
   font: 1rem "Roboto", Helvetica, Arial, sans-serif;
-  color: #1C1C1B;
+  color: #110012;
   background-color: inherit;
   height: auto;
   min-height: 100%;
 }
 
 header {
-  color: #FCFAF2;
-  background-color: #545351;
+  color: #110012;
+  background-color: #FEDB7F;
   padding: 10px;
   margin-bottom: 15px;
 }
@@ -46,18 +46,18 @@ h3 {
 input {
   height: 1.5rem;
   width: 12rem;
-  color: #1C1C1B;
-  background-color: #FCFAF2;
+  color: #110012;
+  background-color: #FAECC9;
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  border-color: #545351;
+  border-color: #796020;
   border-radius: 0;
   border-width: 1px;
 }
 
 input:focus {
-  background-color: #E0DFD7;
+  background-color: #FEDB7F;
   outline: none;
 }
 
@@ -69,9 +69,9 @@ label {
 button {
   height: 1.5rem;
   width: 12rem;
-  color: #1C1C1B;
-  background-color: #E0DFD7;
-  border: 1px solid #545351;
+  color: #110012;
+  background-color: #FEDB7F;
+  border: 1px solid #796020;
   border-radius: 3px;
   cursor: pointer;
   margin: 0 5px;
@@ -107,7 +107,7 @@ td {
 }
 
 .rules {
-  border: 1px solid #545351;
+  border: 1px solid #796020;
   border-radius: 10px;
   padding: 5px;
 }
