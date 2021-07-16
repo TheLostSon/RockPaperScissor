@@ -87,12 +87,12 @@ function Game() {
     function loading() {
         return new Promise((resolve => {
             comLoading.hidden = false;
-            comImage.style.transition = 'transform 2575ms'
-            comImage.style.transform = 'rotate(1080deg)'
+            comImage.style.transition = 'transform 1050ms'
+            comImage.style.transform = 'rotate(720deg)'
             setTimeout(function() {
                 comLoading.hidden = true;
                 resolve();
-            }, 2500)
+            }, 1000)
         }))
     }
 
