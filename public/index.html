@@ -17,7 +17,7 @@
   <header>
     <h1>Schere-Stein-Papier</h1>
   </header>
-  <div class="col-row wide padded">
+  <main class="row padded">
     <!-- WELCOME -->
     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 padded">
       <div id="rules">
@@ -35,6 +35,7 @@
         <span id="gamestart">
           <button id="start">Spiel Starten</button>
           <button id="restart" hidden>Neustarten</button>
+          <button id="last_match" hidden>Zeige letztes Ergebnis</button>
         </span>
       </div>
     </div>
@@ -83,24 +84,32 @@
     </div>
     <!-- RULES END -->
     <div class="col-xl-1 col-lg-12 col-md-7 col-sm-6 col-xs-6"></div>
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height: 2rem;"></div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 game" hidden style="height: 2rem;"></div>
     <!-- GAME -->
-    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 col-xs-12 game" hidden>
-      <div class="game-content row">
-        <span class="col-6 left bold overflow" id="display_name"></span>
-        <span class="col-6 right bold overflow" style="padding-right: 7px;">Computerspieler</span>
+    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 col-xs-12 game row" hidden>
+      <div class="col-6 left bold overflow" id="display_name_game"></div>
+      <div class="col-6 right bold overflow" style="padding-right: 7px;">Computerspieler</div>
 
-        <span class="col-2 centered">
-          <img id="scissors" class="btn_logo" src="/images/scissors.png" alt="Schere" /></span>
-        <span class="col-2 centered">
-          <img id="rock" class="btn_logo" src="/images/rock.png" alt="Stein" /></span>
-        <span class="col-2 centered">
-          <img id="paper" class="btn_logo" src="/images/paper.png" alt="Papier" /></span>
-
-        <span class="col-4 centered">
-          <img class="btn_logo no_cursor" src="/images/versus.png" /></span>
-        <span class="col-2 centered" id="npc_image"></span>
+      <div class="col-2 centered">
+        <div class="centered background">
+          <img id="scissors" class="btn_logo" src="/images/scissors.png" alt="Schere" />
+        </div>
       </div>
+      <div class="col-2 centered">
+        <div class="centered background">
+          <img id="rock" class="btn_logo" src="/images/rock.png" alt="Stein" />
+        </div>
+      </div>
+      <div class="col-2 centered">
+        <div class="centered background">
+          <img id="paper" class="btn_logo" src="/images/paper.png" alt="Papier" />
+        </div>
+      </div>
+
+      <div class="col-4 centered">
+        <img class="btn_logo no_cursor" src="/images/versus.png" />
+      </div>
+      <div class="col-2 centered" id="npc_image"></div>
     </div>
     <!-- GAME END -->
     <!-- SCORE -->
@@ -108,19 +117,30 @@
       <ul style="padding-top: 3rem; margin: auto;">
         <table>
           <tr>
-            <td>Ihre Punktzahl</td>
-            <td class="bold"><span id='points'>0</span></td>
+            <th>Punktzahl</th>
+            <th></th>
           </tr>
           <tr>
-            <td>Ihre Versuche</td>
-            <td class="bold"><span id='tries'>0</span></td>
+            <td id="display_name_points" class="overflow"></td>
+            <td class="bold"><span id='points_player'>0</span></td>
+          </tr>
+          <tr>
+            <td>Computerspieler</td>
+            <td class="bold"><span id='points_com'>0</span></td>
+          </tr>
+          <tr>
+            <td style="padding-top: 10px">Anzahl der Runden</td>
+            <td class="bold" style="padding-top: 10px"><span id='tries'>0</span></td>
           </tr>
         </table>
       </ul>
     </div>
     <!-- SCORE END -->
     <div class="col-xl-1 col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
-  </div>
+  </main>
+  <footer>
+    <!-- todo: add "Impressum" + "Datenschutzerklärung" -->
+  </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
