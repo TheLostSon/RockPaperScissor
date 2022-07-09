@@ -108,7 +108,7 @@ function Game() {
             outcome = {player: 'draw', com: 'draw'}
             gameStatus = game_status_draw;
             return comSymbol;
-        };
+        }
         if (
             (playerSymbol.id === 2) && (comSymbol.id === 1)
             || (playerSymbol.id === 1) && (comSymbol.id === 3)
@@ -187,20 +187,31 @@ function Game() {
         restart_button.hidden = false;
         gameStatus.hidden = true;
 
-        scissors_button.addEventListener('click', scissorButton) 
-        scissors_button.style.cursor = 'pointer';
-        scissors_button.classList.add('clickable')
-        scissors_button.parentElement.style.transform = 'scale(1)'
+        buttonDeclaration(scissors_button, scissorButton)
+        buttonDeclaration(rock_button, rockButton)
+        buttonDeclaration(paper_button, paperButton)
 
-        rock_button.addEventListener('click', rockButton) 
-        rock_button.style.cursor = 'pointer';
-        rock_button.classList.add('clickable')
-        rock_button.parentElement.style.transform = 'scale(1)'
+        // scissors_button.addEventListener('click', scissorButton) 
+        // scissors_button.style.cursor = 'pointer';
+        // scissors_button.classList.add('clickable')
+        // scissors_button.parentElement.style.transform = 'scale(1)'
 
-        paper_button.addEventListener('click', paperButton) 
-        paper_button.style.cursor = 'pointer';
-        paper_button.classList.add('clickable')
-        paper_button.parentElement.style.transform = 'scale(1)'
+        // rock_button.addEventListener('click', rockButton) 
+        // rock_button.style.cursor = 'pointer';
+        // rock_button.classList.add('clickable')
+        // rock_button.parentElement.style.transform = 'scale(1)'
+
+        // paper_button.addEventListener('click', paperButton) 
+        // paper_button.style.cursor = 'pointer';
+        // paper_button.classList.add('clickable')
+        // paper_button.parentElement.style.transform = 'scale(1)'
+    }
+
+    function buttonDeclaration(button, clickHandler) {
+        button.addEventListener('click', clickHandler) 
+        button.style.cursor = 'pointer';
+        button.classList.add('clickable')
+        button.parentElement.style.transform = 'scale(1)'
     }
 
     //disable gameplay
@@ -228,26 +239,24 @@ function Game() {
 
     //click function for scissors
     function scissorButton(){
-        resetStyle()
-        clickedElement = scissors_button.parentElement;
-        playerSymbol = {id: 1, type: 'Schere'}
-        output(compare())
+        symbolButtonHandler(scissors_button, {id: 1, type: 'Schere'});
     }  
 
     //click function for rock
     function rockButton(){
-        resetStyle()
-        clickedElement = rock_button.parentElement;
-        playerSymbol = {id: 2, type: 'Stein'}
-        output(compare())
+        symbolButtonHandler(rock_button, {id: 2, type: 'Stein'});
     }
 
     //click function for paper
     function paperButton(){
-        resetStyle()
-        clickedElement = paper_button.parentElement;
-        playerSymbol = {id: 3, type: 'Papier'}
-        output(compare())
+        symbolButtonHandler(paper_button, {id: 3, type: 'Papier'});
+    }
+
+    function symbolButtonHandler (button, symbol){
+        resetStyle();
+        clickedElement = button.parentElement;
+        playerSymbol = symbol;
+        output(compare());
     }
 
     function restartButton(){
